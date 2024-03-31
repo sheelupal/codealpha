@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+<style>
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.twitter-feed,
+.facebook-feed,
+.instagram-feed {
+    flex-basis: calc(33.33% - 20px);
+    margin-bottom: 20px;
+}
+
+.feed-placeholder {
+    border: 1px solid #ddd;
+    padding: 10px;
+    min-height: 200px;
+}
+
+    </style>
+    </html>
+    <body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Social Media Dashboard</h1>
+        </div>
+        <div class="content">
+            <div class="twitter-feed">
+                <h2>Twitter Feed</h2>
+                <div id="twitter-feed-placeholder" class="feed-placeholder">Loading...</div>
+            </div>
+            <div class="facebook-feed">
+                <h2>Facebook Feed</h2>
+                <div id="facebook-feed-placeholder" class="feed-placeholder">Loading...</div>
+            </div>
+            <div class="instagram-feed">
+                <h2>Instagram Feed</h2>
+                <div id="instagram-feed-placeholder" class="feed-placeholder">Loading...</div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+
+    <script>
+
+        // You would typically use APIs to fetch social media content and replace the placeholders with the actual content.
+// Below is just a placeholder function to simulate fetching content.
+
+function fetchTwitterFeed() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve([
+                { username: 'user1', tweet: 'This is a tweet from user1.' },
+                { username: 'user2', tweet: 'This is a tweet from user2.' },
+                { username: 'user3', tweet: 'This is a tweet from user3.' }
+            ]);
+        }, 2000);
+    });
+}
+
+function fetchFacebookFeed() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve([
+                { username: 'user1', post: 'This is a post from user1.' },
+                { username: 'user2', post: 'This is a post from user2.' },
+                { username: 'user3', post: 'This is a post from user3.' }
+            ]);
+        }, 3000);
+    });
+}
+
+function fetchInstagramFeed() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve([
+                { username: 'user1', image: 'image1.jpg' },
+                { username: 'user2', image: 'image2.jpg' },
+                { username: 'user3', image: 'image3.jpg' }
+            ]);
+        }, 2500);
+    });
+}
+
+function renderTwitterFeed(feed) {
+    const feedPlaceholder = document.getElementById('twitter-feed-placeholder');
+    feedPlaceholder.innerHTML = '';
+    feed.forEach(item => {
+        const tweetElement = document.createElement('div');
+        tweetElement.textContent = `${item.username}: ${item.tweet}`;
+        feedPlaceholder.appendChild(tweetElement);
+    });
+}
+
+function renderFacebookFeed(feed) {
+    const feedPlaceholder = document.getElementById('facebook-feed-placeholder');
+    feedPlaceholder.innerHTML = '';
+    feed.forEach(item => {
+        const postElement = document.createElement('div');
+        postElement.textContent = `${item.username}: ${item.post}`;
+        feedPlaceholder.appendChild(postElement);
+    });
+}
+
+function renderInstagramFeed(feed) {
+    const feedPlaceholder = document.getElementById('instagram-feed-placeholder');
+    feedPlaceholder.innerHTML = '';
+    feed.forEach(item => {
+        const imageElement = document.createElement('img');
+        imageElement.src = item.image;
+        imageElement.alt = `${item.username}'s post`;
+        feedPlaceholder.appendChild(imageElement);
+    });
+}
+
+// Fetch and render social media feeds
+async function loadFeeds() {
+    const twitterFeed = await fetchTwitterFeed();
+    renderTwitterFeed(twitterFeed);
+
+    const facebookFeed = await fetchFacebookFeed();
+    renderFacebookFeed(facebookFeed);
+
+    const instagramFeed = await fetchInstagramFeed();
+    renderInstagramFeed(instagramFeed);
+}
+
+// Load feeds when the page is loaded
+window.onload = loadFeeds;
+
+        </script>
+        </body>
+        
+</html>
